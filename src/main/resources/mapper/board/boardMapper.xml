@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="homeMapper">
+
+    <select id="maxNum" resultType="int">
+        select nvl(max(num),0)
+        from board
+    </select>
+
+    <select id="selectBoardList" resultType="HomeVo">
+        SELECT
+            board_num
+             , reg_date
+             , reg_id
+        FROM lsum9.tb_board
+    </select>
+
+    <select id="selectBoardTotalCount" resultType="int">
+        SELECT count(board_num)
+        FROM lsum9.tb_board
+    </select>
+
+    <select id="selectBoardDetail" parameterType="String">
+        select  board_num
+             , contents
+             , reg_date
+             , reg_id
+        from lsum9.tb_board
+        where board_num = #{boardNum}
+    </select>
+
+    <insert id="insertBoard" parameterType="HomeVo">
+        INSERT INTO lsum9.tb_board
+              contents
+            , reg_date
+            , reg_id
+        VALUES
+            #{contents}
+          , CURRENT_TIMESTAMP
+          , #{regId}
+    </insert>
+
+    <select id="selectPassword" parameterType="String">
+        select user_id
+        from lsum9.tb_user
+        where password = #{password}
+    </select>
+
+    <update id="updateBoard" parameterType="HomeVo">
+        UPDATE lsum9.tb_board
+        SET
+            contents= #{contents}
+            , modify_date=CURRENT_TIMESTAMP
+            , modify_usr=#{modifyUsr}
+        WHERE
+            reg_id = #{regId}
+    </update>
+
+
+</mapper>
