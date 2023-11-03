@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="homeMapper">
+<mapper namespace="BoardMapper">
 
     <select id="maxNum" resultType="int">
         select nvl(max(num),0)
         from board
     </select>
 
-    <select id="selectBoardList" resultType="HomeVo">
+    <select id="selectBoardList" resultType="Boardvo">
         SELECT
             board_num
              , reg_date
@@ -32,7 +32,7 @@
         where board_num = #{boardNum}
     </select>
 
-    <insert id="insertBoard" parameterType="HomeVo">
+    <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO lsum9.tb_board
               contents
             , reg_date
@@ -49,7 +49,7 @@
         where password = #{password}
     </select>
 
-    <update id="updateBoard" parameterType="HomeVo">
+    <update id="updateBoard" parameterType="BoardVo">
         UPDATE lsum9.tb_board
         SET
             contents= #{contents}

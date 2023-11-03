@@ -1,10 +1,10 @@
-package com.lsum9.cafe24.home;
+package com.lsum9.cafe24.board;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HomeApplicationTests {
+class BoardApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,10 +1,10 @@
-package com.lsum9.cafe24.home.vo;
+package com.lsum9.cafe24.board.vo;
 
 import lombok.Data;
 
 @Data
-public class HomeVo {
-    private int board_num;
+public class BoardVo {
+    private int board_no;
     private String contents;
     private String reg_date;
     private String reg_id;
