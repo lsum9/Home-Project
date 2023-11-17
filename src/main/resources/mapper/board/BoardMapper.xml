@@ -3,33 +3,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="BoardMapper">
+<mapper namespace="com.lsum9.cafe24.board.mapper.BoardMapper">
 
-    <select id="maxNum" resultType="int">
-        select nvl(max(num),0)
-        from board
+    <select id="rowCnt" resultType="int">
+        select nvl(max(board_no),0)
+        from tb_board
     </select>
 
-    <select id="selectBoardList" resultType="Boardvo">
+    <select id="selectBoardList" parameterType="PagingVo" resultType="BoardVo">
         SELECT
-            board_num
+            board_no
              , reg_date
              , reg_id
+             , title
         FROM lsum9.tb_board
+        ORDER BY reg_date desc
+        LIMIT #{rowPerPage} offset #{startRow};
     </select>
 
-    <select id="selectBoardTotalCount" resultType="int">
-        SELECT count(board_num)
+    <select id="selectTotalRow" resultType="int">
+        SELECT count(board_no)
         FROM lsum9.tb_board
     </select>
 
     <select id="selectBoardDetail" parameterType="String">
-        select  board_num
+        select  board_no
              , contents
              , reg_date
              , reg_id
         from lsum9.tb_board
-        where board_num = #{boardNum}
+        where board_no = #{boardNo}
     </select>
 
     <insert id="insertBoard" parameterType="BoardVo">
@@ -54,7 +57,7 @@
         SET
             contents= #{contents}
             , modify_date=CURRENT_TIMESTAMP
-            , modify_usr=#{modifyUsr}
+            , modify_id=#{modifyId}
         WHERE
             reg_id = #{regId}
     </update>

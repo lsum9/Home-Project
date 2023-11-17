@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -16,34 +17,62 @@
 <body>
 
 <div class="container mt-3">
-    <h2>Hover Rows</h2>
-    <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>
+    <c:if test="${list == null}">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>게시글이 없습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </c:if>
+    <c:if test="${list != null}">
+    <div><c:out value="${rowCnt}"></c:out></div>
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
         </tr>
         </thead>
+
         <tbody>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>mary@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>july@example.com</td>
-        </tr>
+        <c:forEach var="row" items="${list}">
+            <tr>
+                <td><c:out value="${row.board_no}"></c:out></td>
+                <td><c:out value="${row.title}"></c:out></td>
+                <td><c:out value="${row.reg_id}"></c:out></td>
+                <td><c:out value="${row.reg_date}"></c:out></td>
+            </tr>
+
+        </c:forEach>
         </tbody>
     </table>
+
+        <div>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum-pagingVo.pageNumCnt}">이전</a></li>
+                <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.endPageNum}" >
+                    <li class="page-item"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
+                </c:forEach>
+                <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum+pagingVo.pageNumCnt}">다음</a></li>
+            </ul>
+
+        </div>
+
+
+    </c:if>
 </div>
 
 </body>

@@ -2,6 +2,7 @@ package com.lsum9.cafe24.board.service;
 
 import com.lsum9.cafe24.board.mapper.BoardMapper;
 import com.lsum9.cafe24.board.vo.BoardVo;
+import com.lsum9.cafe24.board.vo.PagingVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +18,16 @@ public class BoardService {
         this.boardMapper = boardMapper;
     }
 
-    public List<BoardVo> boardList(){
-        return boardMapper.selectBoardList();
+    public List<BoardVo> boardList(PagingVo pagingVo){
+        return boardMapper.selectBoardList(pagingVo);
     }
 
-    public BoardVo boardDetail(String boardNum){
-        return boardMapper.selectBoardDetail(boardNum);
+    public int totalRow(){
+        return boardMapper.selectTotalRow();
+    }
+
+    public BoardVo boardDetail(String boardNo){
+        return boardMapper.selectBoardDetail(boardNo);
     }
 
 }//end
