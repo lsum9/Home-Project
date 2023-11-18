@@ -56,14 +56,12 @@ public class BoardController {
         pagingVo.setPageNumCnt(pageNumCnt);
 
         //페이지 시작 숫자
-        System.out.println("페이지 시작 숫자 : "+ startPageNum);
         if(startPageNum <= 1){
             startPageNum = 1;
         }else if(startPageNum >= totalPage){
             startPageNum = totalPage;
         }//if end
         pagingVo.setStartPageNum(startPageNum);
-        System.out.println("페이지 시작 숫자2 : "+ startPageNum);
 
         //페이지 종료 숫자
         int endPageNum = startPageNum + pageNumCnt;
@@ -73,7 +71,7 @@ public class BoardController {
         pagingVo.setEndPageNum(endPageNum);
 
         //페이징정보 넘겨서 게시글목록 받기
-        mav.setViewName("boardList");
+        mav.setViewName("/board/boardList");
         mav.addObject("list", boardService.boardList(pagingVo));
         mav.addObject("pagingVo", pagingVo);
         //mav.addObject("pageNumCnt", pageNumCnt);
@@ -82,4 +80,8 @@ public class BoardController {
         return mav;
     }
 
+    @RequestMapping(value = "/board/writeForm")
+    public String writeForm(){
+        return "/board/writeForm";
+    }//writeForm
 }//end

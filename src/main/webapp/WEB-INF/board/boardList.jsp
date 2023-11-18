@@ -70,10 +70,11 @@
             </ul>
 
         </div>
-
-
     </c:if>
 </div>
 
+<div>
+    <input type="button" value="글작성" onclick="location.href='writeForm'">
+</div>
 </body>
 </html>
