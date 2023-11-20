@@ -50,10 +50,10 @@
         <tbody>
         <c:forEach var="row" items="${list}">
             <tr>
-                <td><c:out value="${row.board_no}"></c:out></td>
-                <td><c:out value="${row.title}"></c:out></td>
-                <td><c:out value="${row.reg_id}"></c:out></td>
-                <td><c:out value="${row.reg_date}"></c:out></td>
+                <td><c:out value="${row.boardNo}"></c:out></td>
+                <td><a href="detail/${row.boardNo}">${row.title}</a></td>
+                <td><c:out value="${row.regId}"></c:out></td>
+                <td><c:out value="${row.regDate}"></c:out></td>
             </tr>
 
         </c:forEach>

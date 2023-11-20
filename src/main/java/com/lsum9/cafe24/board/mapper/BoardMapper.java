@@ -10,7 +10,9 @@ import java.util.List;
 public interface BoardMapper {
     List<BoardVo> selectBoardList(PagingVo pagingVo);
 
-    BoardVo selectBoardDetail(String boardNo);
+    BoardVo selectBoardDetail(int boardNo);
 
     int selectTotalRow();
+
+    int insertBoard(BoardVo boardVo);
 }

@@ -26,7 +26,7 @@
         FROM lsum9.tb_board
     </select>
 
-    <select id="selectBoardDetail" parameterType="String">
+    <select id="selectBoardDetail" parameterType="int" resultType="BoardVo">
         select  board_no
              , contents
              , reg_date
@@ -35,7 +35,7 @@
         where board_no = #{boardNo}
     </select>
 
-    <insert id="insertBoard" parameterType="BoardVo">
+    <insert id="insertBoard" parameterType="int">
         INSERT INTO lsum9.tb_board
               contents
             , reg_date

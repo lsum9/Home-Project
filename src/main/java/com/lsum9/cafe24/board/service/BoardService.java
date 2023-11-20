@@ -26,8 +26,12 @@ public class BoardService {
         return boardMapper.selectTotalRow();
     }
 
-    public BoardVo boardDetail(String boardNo){
+    public BoardVo boardDetail(int boardNo){
         return boardMapper.selectBoardDetail(boardNo);
+    }
+
+    public int insert(BoardVo boardVo){
+        return boardMapper.insertBoard(boardVo);
     }
 
 }//end

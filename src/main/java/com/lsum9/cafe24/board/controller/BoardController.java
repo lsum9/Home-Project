@@ -2,10 +2,14 @@ package com.lsum9.cafe24.board.controller;
 
 import ch.qos.logback.core.net.SyslogOutputStream;
 import com.lsum9.cafe24.board.service.BoardService;
+import com.lsum9.cafe24.board.vo.BoardVo;
 import com.lsum9.cafe24.board.vo.PagingVo;
 import com.lsum9.cafe24.util.Paging;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -74,14 +78,40 @@ public class BoardController {
         mav.setViewName("/board/boardList");
         mav.addObject("list", boardService.boardList(pagingVo));
         mav.addObject("pagingVo", pagingVo);
-        //mav.addObject("pageNumCnt", pageNumCnt);
+
+        //System.out.printf("mav: "+ mav);
+        //System.out.printf("paging"+pagingVo);
 
 
         return mav;
     }
 
-    @RequestMapping(value = "/board/writeForm")
+    //게시글상세조회
+    @GetMapping(value = "board/detail/{boardNo}")
+    public ModelAndView detail(int boardNo){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/board/detail");
+        mav.addObject("detail", boardService.boardDetail(boardNo));
+        return mav;
+    }//detail() end
+
+    @GetMapping(value = "/board/writeForm")
     public String writeForm(){
         return "/board/writeForm";
     }//writeForm
+
+    @PostMapping(value = "/board/insert")
+    public String insert(BoardVo boardVo){
+        ModelAndView mav = new ModelAndView();
+
+        int cnt = 0;
+        cnt = boardService.insert(boardVo);
+        if(cnt < 1){
+            return "board/boardList";
+        }else{
+            return "board/detail";
+        }//if end
+
+        //int board_no = boardService
+    }
 }//end
