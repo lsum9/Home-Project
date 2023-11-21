@@ -36,7 +36,7 @@
 
     </c:if>
     <c:if test="${list != null}">
-    <div><c:out value="${rowCnt}"></c:out></div>
+  <%--  <div><c:out value="${rowCnt}"></c:out></div>--%>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -60,7 +60,7 @@
         </tbody>
     </table>
 
-        <div>
+        <%--<div>
             <ul class="pagination">
                 <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum-pagingVo.pageNumCnt}">이전</a></li>
                 <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.endPageNum}" >
@@ -69,7 +69,7 @@
                 <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum+pagingVo.pageNumCnt}">다음</a></li>
             </ul>
 
-        </div>
+        </div>--%>
     </c:if>
 </div>
 
