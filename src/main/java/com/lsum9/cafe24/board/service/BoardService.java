@@ -28,7 +28,7 @@ public class BoardService {
 
     public Page<BoardVo> boardList(Pageable pageable){
         PagingVo pagingVo = new PagingVo();
-        pagingVo.setStartPageNum((int)pageable.getOffset());
+        pagingVo.setStartRow((int)pageable.getOffset());
         pagingVo.setRowPerPage(pageable.getPageSize());
         List<BoardVo> boardList = boardMapper.selectBoardList(pagingVo);
         Page<BoardVo> result = new PageImpl<>(boardList, pageable, totalRow());

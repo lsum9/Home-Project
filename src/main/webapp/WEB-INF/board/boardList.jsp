@@ -60,16 +60,29 @@
         </tbody>
     </table>
 
-        <%--<div>
+        <div>
             <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum-pagingVo.pageNumCnt}">이전</a></li>
-                <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.endPageNum}" >
-                    <li class="page-item"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
+                <c:if test="${pagingVo.nowPage != 1}">
+                    <li class="page-item"><a class="page-link" href="boardList?nowPage=1"> << </a></li>
+                    <li class="page-item"><a class="page-link" href="boardList?nowPage=${pagingVo.nowPage-1}"> < </a></li>
+                </c:if>
+                <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.startPageNum + pagingVo.pageNumCnt-1}">
+                    <c:choose>
+                        <c:when test="${pagingVo.nowPage == i}">
+                            <li class="page-item active"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
+                        </c:when>
+                        <c:when test="${pagingVo.nowPage != i}">
+                            <li class="page-item"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
+                        </c:when>
+                    </c:choose>
                 </c:forEach>
-                <li class="page-item"><a class="page-link" href="boardList?startPageNum=${pagingVo.startPageNum+pagingVo.pageNumCnt}">다음</a></li>
+                <c:if test="${pagingVo.nowPage != pagingVo.totalPage}">
+                    <li class="page-item"><a class="page-link" href="boardList?nowPage=${pagingVo.nowPage+1}"> > </a></li>
+                    <li class="page-item"><a class="page-link" href="boardList?nowPage=${pagingVo.totalPage}"> >> </a></li>
+                </c:if>
             </ul>
 
-        </div>--%>
+        </div>
     </c:if>
 </div>
 

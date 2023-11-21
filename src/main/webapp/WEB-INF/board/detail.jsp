@@ -26,10 +26,10 @@
             <td>내용</td>
         </tr>
         <tr>
-            <td>${title}</td>
-            <td>${reg_id}</td>
-            <td>${reg_date}</td>
-            <td>${contents}</td>
+            <td>${BoardVo.title}</td>
+            <td>${BoardVo.regId}</td>
+            <td>${BoardVo.regDate}</td>
+            <td>${BoardVo.contents}</td>
         </tr>
 
         </tbody>

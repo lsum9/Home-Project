@@ -11,7 +11,6 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardVo> selectBoardList(PagingVo pagingVo);
-    //Page<BoardVo> selectBoardList(Pageable pageable);
 
     BoardVo selectBoardDetail(int boardNo);
 

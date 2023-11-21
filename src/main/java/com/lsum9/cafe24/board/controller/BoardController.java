@@ -7,6 +7,7 @@ import com.lsum9.cafe24.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -30,17 +31,38 @@ public class BoardController {
     }
 
     @RequestMapping(value = "/board/boardList")
-    public ModelAndView board(@PageableDefault(value = 5) Pageable pageable
-                             , @RequestParam(value = "nowPage", defaultValue = "0") int nowPage
+    public ModelAndView board(Pageable pageable
+                             , @RequestParam(value = "nowPage", defaultValue = "1") int nowPage
                               ) throws Exception{
 
         ModelAndView mav = new ModelAndView();
+
+        pageable = PageRequest.of(nowPage-1, 5); //offset은 0부터 시작해야 하므로 nowPage-1
         Page<BoardVo> boardList = boardService.boardList(pageable);
+        //페이징 처리 위한 클래스 호출
+        Paging paging = new Paging();
+
+        //페이징 처리 위한 vo객체 생성
+        PagingVo pagingVo = new PagingVo();
+
+        //페이지당 행수, 네비 페이지숫자 노출갯수
+        int rowPerPage = 5;
+        int pageNumCnt = 5;
+        int totalPage = boardList.getTotalPages();
+
+        //페이징정보 구성 위한 파라미터 set
+        pagingVo.setNowPage(nowPage);
+        pagingVo.setRowPerPage(rowPerPage);
+        pagingVo.setPageNumCnt(pageNumCnt);
+        pagingVo.setTotalPage(totalPage);
+
+        //페이징정보 구성 위한 클래스에 필요 파라미터 넘기기
+        paging.pagingInfo(pagingVo);
 
         //페이징정보 넘겨서 게시글목록 받기
         mav.setViewName("/board/boardList");
         mav.addObject("list", boardList.getContent());
-
+        mav.addObject("pagingVo", pagingVo);
 
         return mav;
     }
