@@ -11,10 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -68,31 +65,61 @@ public class BoardController {
     }
 
     //게시글상세조회
-    @GetMapping(value = "board/detail/{boardNo}")
-    public ModelAndView detail(int boardNo){
+    @GetMapping(value = "/board/detail")
+    public ModelAndView detail(@RequestParam(value = "boardNo") int boardNo){
         ModelAndView mav = new ModelAndView();
+
         mav.setViewName("/board/detail");
-        mav.addObject("detail", boardService.boardDetail(boardNo));
+        mav.addObject("boardVo", boardService.boardDetail(boardNo));
+        System.out.println("디테일:"+mav);
         return mav;
     }//detail() end
 
+    //게시글 작성
     @GetMapping(value = "/board/writeForm")
     public String writeForm(){
         return "/board/writeForm";
     }//writeForm
 
     @PostMapping(value = "/board/insert")
-    public String insert(BoardVo boardVo){
-        ModelAndView mav = new ModelAndView();
+    public String insert(@ModelAttribute BoardVo boardVo){
 
         int cnt = 0;
         cnt = boardService.insert(boardVo);
-        if(cnt < 1){
-            return "board/boardList";
-        }else{
-            return "board/detail";
-        }//if end
+        System.out.println("인서트확인: " + cnt);
 
-        //int board_no = boardService
+        return "redirect:/board/boardList";
     }
+
+    //게시글 삭제
+    @RequestMapping(value = "/board/delete")
+    public String delete(@RequestParam(value = "boardNo") int boardNo){
+        System.out.println(boardNo);
+        int cnt = 0;
+        cnt = boardService.delete(boardNo);
+
+        return "redirect:/board/boardList";
+    }
+
+    //게시글 수정
+    @GetMapping(value = "/board/updateForm")
+    public ModelAndView updateForm(@RequestParam(value = "boardNo") int boardNo) {
+        ModelAndView mav = new ModelAndView();
+
+        mav.setViewName("/board/updateForm");
+        mav.addObject("boardVo", boardService.boardDetail(boardNo));
+
+        return mav;
+    }//writeForm
+
+    @PostMapping(value = "/board/update")
+    public String update(@ModelAttribute BoardVo boardVo){
+        System.out.println("수정내용:"+boardVo);
+        int cnt = 0;
+        cnt = boardService.update(boardVo);
+        System.out.println("업데이트확인: " + cnt);
+
+        return "redirect:/board/boardList";
+    }
+
 }//end

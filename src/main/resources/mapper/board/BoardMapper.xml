@@ -27,7 +27,9 @@
     </select>
 
     <select id="selectBoardDetail" parameterType="int" resultType="BoardVo">
-        select  board_no
+        select
+            title
+             , board_no
              , contents
              , reg_date
              , reg_id
@@ -35,16 +37,28 @@
         where board_no = #{boardNo}
     </select>
 
-    <insert id="insertBoard" parameterType="int">
+    <insert id="insertBoard" parameterType="BoardVo">
         INSERT INTO lsum9.tb_board
-              contents
-            , reg_date
+            (
+             contents
+            , title
             , reg_id
+            , reg_date
+            )
         VALUES
-            #{contents}
-          , CURRENT_TIMESTAMP
-          , #{regId}
+            (
+            #{title}
+            , #{contents}
+            , #{regId}
+            , current_timestamp()
+            );
     </insert>
+
+    <delete id="deleteBoard" parameterType="int">
+        DELETE
+        FROM lsum9.tb_board
+        WHERE board_no=#{boardNo};
+    </delete>
 
     <select id="selectPassword" parameterType="String">
         select user_id
@@ -57,9 +71,9 @@
         SET
             contents= #{contents}
             , modify_date=CURRENT_TIMESTAMP
-            , modify_id=#{modifyId}
+            , modify_id=#{regId}
         WHERE
-            reg_id = #{regId}
+            board_no = #{boardNo}
     </update>
 
 

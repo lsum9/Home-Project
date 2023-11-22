@@ -17,4 +17,8 @@ public interface BoardMapper {
     int selectTotalRow();
 
     int insertBoard(BoardVo boardVo);
+
+    int deleteBoard(int boardNo);
+
+    int updateBoard(BoardVo boardVo);
 }

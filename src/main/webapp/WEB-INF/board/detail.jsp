@@ -15,8 +15,7 @@
 <body>
 
 <div class="container mt-3">
-    <h2>Bordered Table</h2>
-    <p>The .table-bordered class adds borders on all sides of the table and the cells:</p>
+    <h2>Board Detail</h2>
     <table class="table table-bordered">
         <tbody>
         <tr>
@@ -26,14 +25,21 @@
             <td>내용</td>
         </tr>
         <tr>
-            <td>${BoardVo.title}</td>
-            <td>${BoardVo.regId}</td>
-            <td>${BoardVo.regDate}</td>
-            <td>${BoardVo.contents}</td>
+            <td>${boardVo.title}</td>
+            <td>${boardVo.regId}</td>
+            <td>${boardVo.regDate}</td>
+            <td>${boardVo.contents}</td>
         </tr>
-
         </tbody>
     </table>
+</div>
+
+<div>
+    <input type="button" value="목록으로" onclick="location.href='/board/boardList'">
+    <input type="button" value="삭제" onclick="location.href='delete?boardNo=${boardVo.boardNo}'">
+    <input type="button" value="수정" onclick="location.href='updateForm?boardNo=${boardVo.boardNo}'">
+
+
 </div>
 </body>
 </html>

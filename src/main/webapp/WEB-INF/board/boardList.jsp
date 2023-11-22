@@ -51,7 +51,7 @@
         <c:forEach var="row" items="${list}">
             <tr>
                 <td><c:out value="${row.boardNo}"></c:out></td>
-                <td><a href="detail/${row.boardNo}">${row.title}</a></td>
+                <td><a href="detail?boardNo=${row.boardNo}">${row.title}</a></td>
                 <td><c:out value="${row.regId}"></c:out></td>
                 <td><c:out value="${row.regDate}"></c:out></td>
             </tr>

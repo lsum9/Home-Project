@@ -15,23 +15,24 @@
     <title>writeForm</title>
 </head>
 <body>
-<form method="post" action="/board/insert">
+<form method="post" action="/board/update">
+    <input type="hidden" name="boardNo" value="${boardVo.boardNo}">
     <div class="mb-3">
         <label for="title" class="form-label">제목</label>
-        <input type="text" class="form-control" name="title" id="title">
+        <input type="text" class="form-control" name="title" id="title" value="${boardVo.title}">
     </div>
     <div class="mb-3">
         <label for="regId" class="form-label">작성자</label>
-        <input type="text" class="form-control" name="regId" id="regId">
+        <input type="text" class="form-control" name="regId" id="regId" value="${boardVo.regId}">
     </div>
     <div class="mb-3">
         <label for="contents" class="form-label">내용</label>
-        <input type="text" class="form-control" name="contents" id="contents">
+        <input type="text" class="form-control" name="contents" id="contents" value="${boardVo.contents}">
     </div>
     <div>
 
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">수정</button>
 </form>
 </body>
 </html>

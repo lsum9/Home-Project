@@ -46,4 +46,11 @@ public class BoardService {
         return boardMapper.insertBoard(boardVo);
     }
 
+    public int delete(int boardNo){
+        return boardMapper.deleteBoard(boardNo);
+    }
+
+    public int update(BoardVo boardVo){
+        return boardMapper.updateBoard(boardVo);
+    }
 }//end
