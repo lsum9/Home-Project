@@ -45,11 +45,16 @@
         </tr>
         </thead>
         <tbody>
+        <!----------첫째주영역시작------------>
         <tr>
             <c:forEach var="i" begin="1" end="7">
                 <c:choose>
                     <c:when test="${i==firstDay}">
-                        <td><c:out value="1"></c:out></td>
+                        <td>
+                            <c:out value="1"></c:out>
+                            <br>
+
+                        </td>
                     </c:when>
 
                     <c:when test="${i!=firstDay}">
@@ -64,11 +69,12 @@
                 </c:choose>
             </c:forEach>
         </tr>
+        <!----------첫째주영역끝------------>
+
+        <!----------나머지주영역시작------------>
     <c:forEach var="b" begin="0" end="3">
         <tr>
             <c:forEach var="a" begin="1" end="7">
-               <%-- <td><c:out value="${n+a+b*7}"></c:out></td>--%>
-
                 <c:if test="${n+a+b*7 <= lastDate}">
                     <td><c:out value="${n+a+b*7}"></c:out></td>
                 </c:if>
@@ -78,10 +84,13 @@
             </c:forEach>
         </tr>
     </c:forEach>
+        <!----------나머지주영역끝------------>
         </tbody>
     </table>
 </div>
-
+<div>
+    <input type="button" value="일정작성">
+</div>
 
 
 </body>
