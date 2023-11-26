@@ -42,7 +42,7 @@ public class SchedulerController {
         mav.addObject("date", schedulDto.getDate());
         mav.addObject("day", schedulDto.getDay());
         mav.addObject("firstDay", schedulDto.getFirstDay());
-
+        mav.addObject("lastDate", schedulDto.getLastDate());
         return mav;
     }
 /*

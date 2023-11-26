@@ -46,7 +46,7 @@
         </thead>
         <tbody>
         <tr>
-            <c:forEach var="i" begin="1" end="7" varStatus="n">
+            <c:forEach var="i" begin="1" end="7">
                 <c:choose>
                     <c:when test="${i==firstDay}">
                         <td><c:out value="1"></c:out></td>
@@ -58,56 +58,26 @@
                         </c:if>
                         <c:if test="${i > firstDay}">
                         <td><c:out value="${i-firstDay+1}"></c:out></td>
+                            <c:set var="n" value="${i-firstDay+1}"></c:set>
                         </c:if>
                     </c:when>
                 </c:choose>
             </c:forEach>
         </tr>
+    <c:forEach var="b" begin="0" end="3">
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <c:forEach var="a" begin="1" end="7">
+               <%-- <td><c:out value="${n+a+b*7}"></c:out></td>--%>
+
+                <c:if test="${n+a+b*7 <= lastDate}">
+                    <td><c:out value="${n+a+b*7}"></c:out></td>
+                </c:if>
+                <c:if test="${n+a+b*7 > lastDate}">
+                    <td></td>
+                </c:if>
+            </c:forEach>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+    </c:forEach>
         </tbody>
     </table>
 </div>

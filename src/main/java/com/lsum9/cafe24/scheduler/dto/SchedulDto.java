@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
 import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 
 public class SchedulDto {
@@ -14,6 +15,8 @@ public class SchedulDto {
     private String time;
 
     private int firstDay;
+    private int lastDate;
+    private int secondWeekSun;
 
 
 
@@ -32,6 +35,13 @@ public class SchedulDto {
 
     public int getDate() {
         return nowDate.getDayOfMonth();
+    }
+
+    //이번달의 마지막일
+    public int getLastDate(){
+        int lastDate =  nowDate.with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth();
+        System.out.println(lastDate);
+        return lastDate;
     }
 
     public String getDay() {
@@ -64,6 +74,8 @@ public class SchedulDto {
         };
         return firstDayNum;
     }
+
+
 
     /* public String getTime() {
         String time =
