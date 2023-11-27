@@ -29,7 +29,9 @@ public class BoardController {
 
     @RequestMapping(value = "/board/boardList")
     public ModelAndView board(Pageable pageable
-                             , @RequestParam(value = "nowPage", defaultValue = "1") int nowPage
+                              ,@RequestParam(value = "nowPage", defaultValue = "1") int nowPage
+                              ,@RequestParam(value = "keyWord", defaultValue = "") String keyWord
+                              ,@RequestParam(value = "searchType", defaultValue = "title") String searchType
                               ) throws Exception{
 
         ModelAndView mav = new ModelAndView();
@@ -53,12 +55,13 @@ public class BoardController {
         pagingVo.setPageNumCnt(pageNumCnt);
         pagingVo.setTotalPage(totalPage);
 
-        //페이징정보 구성 위한 클래스에 필요 파라미터 넘기기
-        paging.pagingInfo(pagingVo);
+        //페이징정보 구성 위한 클래스에 필요 파라미터 넘기고 네비정보 추가해오기
+        pagingVo = paging.pagingInfo(pagingVo);
 
         //페이징정보 넘겨서 게시글목록 받기
         mav.setViewName("/board/boardList");
         mav.addObject("list", boardList.getContent());
+        mav.addObject("totalRow", boardService.totalRow());
         mav.addObject("pagingVo", pagingVo);
 
         return mav;
@@ -87,6 +90,7 @@ public class BoardController {
         int cnt = 0;
         cnt = boardService.insert(boardVo);
         System.out.println("인서트확인: " + cnt);
+        System.out.println("인서트내용 : " + boardVo);
 
         return "redirect:/board/boardList";
     }

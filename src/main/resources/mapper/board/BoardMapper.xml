@@ -47,8 +47,8 @@
             )
         VALUES
             (
-            #{title}
-            , #{contents}
+            #{contents}
+            ,#{title}
             , #{regId}
             , current_timestamp()
             );
@@ -69,9 +69,11 @@
     <update id="updateBoard" parameterType="BoardVo">
         UPDATE lsum9.tb_board
         SET
-            contents= #{contents}
+            title=#{title}
+            , contents= #{contents}
             , modify_date=CURRENT_TIMESTAMP
             , modify_id=#{regId}
+            , reg_id=#{regId}
         WHERE
             board_no = #{boardNo}
     </update>

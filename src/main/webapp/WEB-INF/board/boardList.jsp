@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8">
@@ -17,7 +18,14 @@
 <body>
 
 <div class="container mt-3">
-    <c:if test="${list == null}">
+    <div>
+        <form method="get" action="/board/search" >
+            <input type="text">
+            <input type="submit" value="검색">
+        </form>
+    </div>
+    <div>
+    <c:if test="${fn:length(list) == 0}">
         <table class="table table-hover">
             <thead>
             <tr>
@@ -29,13 +37,13 @@
             </thead>
             <tbody>
             <tr>
-                <td>게시글이 없습니다.</td>
+                <td colspan="4">게시글이 없습니다.</td>
             </tr>
             </tbody>
         </table>
 
     </c:if>
-    <c:if test="${list != null}">
+    <c:if test="${fn:length(list) != 0}">
   <%--  <div><c:out value="${rowCnt}"></c:out></div>--%>
     <table class="table table-hover">
         <thead>
@@ -59,14 +67,15 @@
         </c:forEach>
         </tbody>
     </table>
-
+    </div>
         <div>
             <ul class="pagination">
                 <c:if test="${pagingVo.nowPage != 1}">
                     <li class="page-item"><a class="page-link" href="boardList?nowPage=1"> << </a></li>
                     <li class="page-item"><a class="page-link" href="boardList?nowPage=${pagingVo.nowPage-1}"> < </a></li>
                 </c:if>
-                <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.startPageNum + pagingVo.pageNumCnt-1}">
+                <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.endPageNum}">
+                <%--<c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.startPageNum + pagingVo.pageNumCnt-1}">--%>
                     <c:choose>
                         <c:when test="${pagingVo.nowPage == i}">
                             <li class="page-item active"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
