@@ -8,22 +8,30 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 
 public class SchedulDto {
+    //현재 날짜정보 가져오기
+    LocalDate nowDate = LocalDate.now();
+    //LocalTime nowTime = LocalTime.now();
     private int year;
     private int month;
     private int date;
     private String day;
     private String time;
+    private String nowDateString;
 
     private int firstDay;
     private int lastDate;
-    private int secondWeekSun;
 
 
+    /*public SchedulDto(String showDate, int chgMonth) {
 
-    //현재 날짜정보 가져오기
-    LocalDate nowDate = LocalDate.now();
-    LocalTime nowTime = LocalTime.now();
-    YearMonth yearMonth = YearMonth.now();
+        this.year = year;
+        this.month = month;
+        this.date = date;
+        this.day = day;
+        this.time = time;
+        this.firstDay = firstDay;
+        this.lastDate = lastDate;
+    }*/
 
     public int getYear() {
         return nowDate.getYear();
@@ -37,10 +45,13 @@ public class SchedulDto {
         return nowDate.getDayOfMonth();
     }
 
+    public String getNowDate(){
+        return nowDate.toString();
+    }
+
     //이번달의 마지막일
     public int getLastDate(){
         int lastDate =  nowDate.with(TemporalAdjusters.lastDayOfMonth()).getDayOfMonth();
-        System.out.println(lastDate);
         return lastDate;
     }
 

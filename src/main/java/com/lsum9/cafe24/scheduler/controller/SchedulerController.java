@@ -27,24 +27,26 @@ public class SchedulerController {
     }
 
     @RequestMapping(value = "/schedulerList")
-    public ModelAndView Scheduler(Pageable pageable
-                              ,@RequestParam(value = "nowPage", defaultValue = "1") int nowPage
+    public ModelAndView scheduler(@RequestParam(value = "showDate", defaultValue = "") String showDate
+                                 ,@RequestParam(value = "chgMonth", defaultValue = "0") int chgMonth
                               ) throws Exception{
 
         ModelAndView mav = new ModelAndView();
 
 
+        //SchedulDto schedulDto = new SchedulDto(showDate, chgMonth);
         SchedulDto schedulDto = new SchedulDto();
         //현재날짜 정보 넘겨 달력리스트 받기
         mav.setViewName("/scheduler/schedulerList");
-        mav.addObject("year", schedulDto.getYear());
-        mav.addObject("month", schedulDto.getMonth());
-        mav.addObject("date", schedulDto.getDate());
-        mav.addObject("day", schedulDto.getDay());
-        mav.addObject("firstDay", schedulDto.getFirstDay());
-        mav.addObject("lastDate", schedulDto.getLastDate());
+        mav.addObject("schedulDto", schedulDto);
+
+        System.out.println("nowdate: "+ schedulDto.getNowDate());
         return mav;
     }
+
+
+
+
 /*
 
     //게시글상세조회
