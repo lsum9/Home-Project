@@ -7,5 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface SchedulerMapper {
+    List<SchedulerDto> selectScheduleList(SchedulerDto schedulerDto);
+
+    int insertSchedule(SchedulerDto schedulerDto);
 
 }

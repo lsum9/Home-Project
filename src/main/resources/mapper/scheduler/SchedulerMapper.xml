@@ -3,7 +3,52 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.lsum9.cafe24.board.mapper.SchedulerMapper">
+<mapper namespace="com.lsum9.cafe24.scheduler.mapper.SchedulerMapper">
 
+    <select id="selectScheduleList" parameterType="SchedulerDto" resultType="SchedulerDto">
+        SELECT
+            schedule_no
+             , schedule_year
+             , schedule_month
+             , schedule_date
+             , schedule_day
+             , schedule_start_time
+             , schedule_end_time
+             , `text`
+             , reg_id
+             , reg_date
+             , modify_id
+             , modify_date
+        FROM lsum9.tb_scheduler
+        WHERE schedul_year = #{scheduleYear}
+          AND schedul_month = #{scheduleMonth};
+    </select>
 
+    <insert id="insertSchedule" parameterType="SchedulerDto">
+        INSERT INTO
+            lsum9.tb_scheduler
+            (
+             schedule_year
+            , schedule_month
+            , schedule_date
+            , schedule_day
+            , schedule_start_time
+            , schedule_end_time
+            , `text`
+            , reg_id
+            , reg_date
+            )
+        VALUES
+            (
+             #{scheduleYear}
+            , #{scheduleMonth}
+            , #{scheduleDate}
+            , #{scheduleDay}
+            , #{scheduleStartTime}
+            , #{scheduleEndTime}
+            , #{text}
+            , #{regId}
+            , current_timestamp()
+            );
+    </insert>
 </mapper>

@@ -14,17 +14,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker();
+        } );
+    </script>
     <title>scheduler</title>
+    <link rel="stylesheet" href="/schedulerCss.css"/>
 </head>
 <body>
+<!--일정추가 모달-->
+<div id="my_modal">
+    <form method="post" action="insert">
+        <div>
+            <p>Date: <input type="text" id="datepicker" name="fullDate" value="날짜선택" readonly></p>
+        </div>
+        <div>
+            시작 : <input type="time" name="scheduleStartTime">
+            종료 : <input type="time" name="scheduleEndTime">
+        </div>
+        <div>
+            <input type="text" name="text" placeholder="일정을 입력해 주세요">
+        </div>
+        <input type="submit" value="작성">
+        <a class="modal_close_btn">닫기</a>
+    </form>
+
+</div>
 <div>
-    <%--<c:set var="showDate" value="${schedulDto.date}">--%>
+    <%--<c:set var="showDate" value="${dateDto.date}">--%>
     <table class="table">
         <tr class="table-active">
             <td><input type="button" value="<" onclick="location.href='scheduler?chgMonth=-1'"></td>
             <td>이전달</td>
-            <td><c:out value="${schedulDto.year}"></c:out>년</td>
-            <td><c:out value="${schedulDto.month}"></c:out>월</td>
+            <td><c:out value="${dateDto.year}"></c:out>년</td>
+            <td><c:out value="${dateDto.month}"></c:out>월</td>
 
             <td>다음달</td>
             <td><input type="button" value=">" onclick="location.href='scheduler?chgMonth=1'"></td>
@@ -50,21 +78,23 @@
         <tr>
             <c:forEach var="i" begin="1" end="7">
                 <c:choose>
-                    <c:when test="${i==schedulDto.firstDay}">
+                    <c:when test="${i==dateDto.firstDay}">
                         <td>
                             <c:out value="1"></c:out>
                             <br>
-
+                            <table>
+                                <tr></tr>
+                            </table>
                         </td>
                     </c:when>
 
-                    <c:when test="${i!=schedulDto.firstDay}">
-                        <c:if test="${i < schedulDto.firstDay}">
+                    <c:when test="${i!=dateDto.firstDay}">
+                        <c:if test="${i < dateDto.firstDay}">
                         <td></td>
                         </c:if>
-                        <c:if test="${i > schedulDto.firstDay}">
-                        <td><c:out value="${i-schedulDto.firstDay+1}"></c:out></td>
-                            <c:set var="n" value="${i-schedulDto.firstDay+1}"></c:set>
+                        <c:if test="${i > dateDto.firstDay}">
+                        <td><c:out value="${i-dateDto.firstDay+1}"></c:out></td>
+                            <c:set var="n" value="${i-dateDto.firstDay+1}"></c:set>
                         </c:if>
                     </c:when>
                 </c:choose>
@@ -76,10 +106,10 @@
     <c:forEach var="b" begin="0" end="3">
         <tr>
             <c:forEach var="a" begin="1" end="7">
-                <c:if test="${n+a+b*7 <= schedulDto.lastDate}">
+                <c:if test="${n+a+b*7 <= dateDto.lastDate}">
                     <td><c:out value="${n+a+b*7}"></c:out></td>
                 </c:if>
-                <c:if test="${n+a+b*7 > schedulDto.lastDate}">
+                <c:if test="${n+a+b*7 > dateDto.lastDate}">
                     <td></td>
                 </c:if>
             </c:forEach>
@@ -90,9 +120,10 @@
     </table>
 </div>
 <div>
-    <input type="button" value="일정작성">
+    <button id="popup_open_btn">일정작성</button>
 </div>
 
+<script type="text/javascript" src="/schedulerJS.js"></script>
 
 </body>
 </html>

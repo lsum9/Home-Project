@@ -1,13 +1,9 @@
 package com.lsum9.cafe24.scheduler.dto;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.YearMonth;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Calendar;
 
-public class SchedulDto {
+public class DateDto {
     //현재 날짜정보 가져오기
     LocalDate nowDate = LocalDate.now();
     //LocalTime nowTime = LocalTime.now();
@@ -21,17 +17,6 @@ public class SchedulDto {
     private int firstDay;
     private int lastDate;
 
-
-    /*public SchedulDto(String showDate, int chgMonth) {
-
-        this.year = year;
-        this.month = month;
-        this.date = date;
-        this.day = day;
-        this.time = time;
-        this.firstDay = firstDay;
-        this.lastDate = lastDate;
-    }*/
 
     public int getYear() {
         return nowDate.getYear();
