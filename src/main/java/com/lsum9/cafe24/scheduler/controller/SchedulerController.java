@@ -3,10 +3,13 @@ package com.lsum9.cafe24.scheduler.controller;
 import com.lsum9.cafe24.scheduler.dto.DateDto;
 import com.lsum9.cafe24.scheduler.dto.SchedulerDto;
 import com.lsum9.cafe24.scheduler.service.SchedulerService;
+import com.lsum9.cafe24.util.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.time.LocalDate;
 
 
 @Controller
@@ -24,13 +27,9 @@ public class SchedulerController {
                                  ,@RequestParam(value = "chgMonth", defaultValue = "0") int chgMonth
                               ) throws Exception{
         ModelAndView mav = new ModelAndView();
-
-        //dateDto dateDto = new dateDto(showDate, chgMonth);
         DateDto dateDto = new DateDto();
+        dateDto.setChgMonth(chgMonth);
         mav.setViewName("/scheduler/schedulerList");
-
-        //현재날짜 정보 넘겨 달력리스트 받기
-        mav.addObject("dateDto", dateDto);
 
         //작성된 스케줄 정보 받기
         SchedulerDto schedulerDto = new SchedulerDto();
@@ -39,6 +38,12 @@ public class SchedulerController {
         mav.addObject("schedulerList", schedulerService.scheduleList(schedulerDto));
 */
         System.out.println("nowdate: "+ dateDto.getNowDate());
+        LocalDate nowDate = LocalDate.now();
+        Scheduler scheduler = new Scheduler();
+        System.out.println(scheduler.scheduler(dateDto));
+
+        //현재날짜 정보 넘겨 달력리스트 받기
+        mav.addObject("dateDto", dateDto);
         return mav;
     }
 

@@ -49,13 +49,12 @@
     <%--<c:set var="showDate" value="${dateDto.date}">--%>
     <table class="table">
         <tr class="table-active">
-            <td><input type="button" value="<" onclick="location.href='scheduler?chgMonth=-1'"></td>
+            <td><input type="button" value="<" onclick="location.href='/scheduler/schedulerList?chgMonth=${dateDto.chgMonth-1}'"></td>
             <td>이전달</td>
             <td><c:out value="${dateDto.year}"></c:out>년</td>
             <td><c:out value="${dateDto.month}"></c:out>월</td>
-
             <td>다음달</td>
-            <td><input type="button" value=">" onclick="location.href='scheduler?chgMonth=1'"></td>
+            <td><input type="button" value=">" onclick="location.href='/scheduler/schedulerList?chgMonth=${dateDto.chgMonth+1}'"></td>
         </tr>
     </table>
 
@@ -130,6 +129,7 @@
 </div>
 <div>
     <button id="popup_open_btn">일정작성</button>
+    <button onclick="location.href='/scheduler/schedulerList?chgMonth=0'">현재월로</button>
 </div>
 
 <script type="text/javascript" src="/schedulerJS.js"></script>

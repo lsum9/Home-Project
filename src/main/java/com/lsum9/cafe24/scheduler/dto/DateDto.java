@@ -1,10 +1,23 @@
 package com.lsum9.cafe24.scheduler.dto;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 
+@Data
 public class DateDto {
-    //현재 날짜정보 가져오기
+    private int year;
+    private int month;
+    private int date;
+    private String day;
+    private String time;
+    private String nowDate;
+    private int firstDay;
+    private int lastDate;
+    private int chgMonth;
+
+/*    //현재 날짜정보 가져오기
     LocalDate nowDate = LocalDate.now();
     //LocalTime nowTime = LocalTime.now();
     private int year;
@@ -69,12 +82,6 @@ public class DateDto {
             default -> 0;
         };
         return firstDayNum;
-    }
-
-    /* public String getTime() {
-        String time =
-        return nowTime.getHour();
-    }
-*/
+    }*/
 
 }
