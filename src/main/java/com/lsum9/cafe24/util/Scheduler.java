@@ -7,10 +7,10 @@ import java.time.temporal.TemporalAdjusters;
 
 public class Scheduler {
     public DateDto scheduler (DateDto dateDto){
-        //현재 날짜정보 가져오기
+        //불러올 날짜정보 가져오기
         LocalDate nowDate = LocalDate.now().plusMonths(dateDto.getChgMonth());
 
-        //페이지 첫진입시 현재일자 가져오기
+        //dto에 날짜정보 넣기
         dateDto.setYear(nowDate.getYear());
         dateDto.setMonth(nowDate.getMonthValue());
         dateDto.setDate(nowDate.getDayOfMonth());

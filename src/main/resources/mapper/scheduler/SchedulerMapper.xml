@@ -11,7 +11,6 @@
              , schedule_year
              , schedule_month
              , schedule_date
-             , schedule_day
              , schedule_start_time
              , schedule_end_time
              , `text`
@@ -20,8 +19,8 @@
              , modify_id
              , modify_date
         FROM lsum9.tb_scheduler
-        WHERE schedul_year = #{scheduleYear}
-          AND schedul_month = #{scheduleMonth};
+        WHERE schedule_year = #{scheduleYear}
+          AND schedule_month = #{scheduleMonth};
     </select>
 
     <insert id="insertSchedule" parameterType="SchedulerDto">

@@ -23,27 +23,31 @@ public class SchedulerController {
     }
 
     @RequestMapping(value = "/schedulerList")
-    public ModelAndView scheduler(@RequestParam(value = "selectDate", defaultValue = "") String selectDate
-                                 ,@RequestParam(value = "chgMonth", defaultValue = "0") int chgMonth
+    public ModelAndView scheduler(@RequestParam(value = "chgMonth", defaultValue = "0") int chgMonth
+                                  ,@ModelAttribute DateDto dateDto
                               ) throws Exception{
         ModelAndView mav = new ModelAndView();
-        DateDto dateDto = new DateDto();
-        dateDto.setChgMonth(chgMonth);
-        mav.setViewName("/scheduler/schedulerList");
-
-        //작성된 스케줄 정보 받기
-        SchedulerDto schedulerDto = new SchedulerDto();
-        /*schedulerDto.setSchedulYear(dateDto.getYear());
-        schedulerDto.setSchedulMonth(dateDto.getMonth());
-        mav.addObject("schedulerList", schedulerService.scheduleList(schedulerDto));
-*/
-        System.out.println("nowdate: "+ dateDto.getNowDate());
-        LocalDate nowDate = LocalDate.now();
+        
+        //달력 날짜구성 위한 클래스 객체생성
         Scheduler scheduler = new Scheduler();
-        System.out.println(scheduler.scheduler(dateDto));
+        //변경된 달 세팅
+        dateDto.setChgMonth(chgMonth);
+
+        //달력 날짜구성
+        dateDto = scheduler.scheduler(dateDto);
+
+        mav.setViewName("/scheduler/schedulerList");
 
         //현재날짜 정보 넘겨 달력리스트 받기
         mav.addObject("dateDto", dateDto);
+
+        //작성된 스케줄 정보 받기
+        SchedulerDto schedulerDto = new SchedulerDto();
+        schedulerDto.setScheduleYear(dateDto.getYear());
+        schedulerDto.setScheduleMonth(dateDto.getMonth());
+        //schedulerDto.setScheduleDate(dateDto.getDate());
+        mav.addObject("list", schedulerService.scheduleList(schedulerDto));
+        System.out.println(schedulerService.scheduleList(schedulerDto));
         return mav;
     }
 

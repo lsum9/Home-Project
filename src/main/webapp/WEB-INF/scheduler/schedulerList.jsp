@@ -82,9 +82,19 @@
                             <c:out value="1"></c:out>
                             <c:set var="date" value="1"></c:set>
                             <br>
-                            <table>
-                                <tr></tr>
-                            </table>
+                            <c:if test="${list.size() > 0}">
+                                <c:forEach var="row" items="${list}">
+                                    <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == 1}">
+                                        <p>
+                                            <c:out value="${row.scheduleStartTime}"></c:out>
+                                            ~
+                                            <c:out value="${row.scheduleEndTime}"></c:out>
+
+                                            <c:out value="${row.text}"></c:out>
+                                        </p>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
                         </td>
                     </c:when>
 
@@ -100,6 +110,19 @@
                         <td>
                             <c:out value="${firstWeekDate}"></c:out>
                             <br>
+                            <c:if test="${list.size() > 0}">
+                                <c:forEach var="row" items="${list}">
+                                    <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == firstWeekDate}">
+                                        <p>
+                                            <c:out value="${row.scheduleStartTime}"></c:out>
+                                            ~
+                                            <c:out value="${row.scheduleEndTime}"></c:out>
+
+                                            <c:out value="${row.text}"></c:out>
+                                        </p>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
                         </td>
 
                         </c:if>
@@ -116,6 +139,20 @@
                 <c:set var="date" value="${firstWeekDate + boxNo + weekNo*7}"></c:set>
                 <c:if test="${date <= dateDto.lastDate}">
                     <td><c:out value="${date}"></c:out></td>
+                    <br>
+                    <c:if test="${list.size() > 0}">
+                        <c:forEach var="row" items="${list}">
+                            <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == date}">
+                                <p>
+                                    <c:out value="${row.scheduleStartTime}"></c:out>
+                                    ~
+                                    <c:out value="${row.scheduleEndTime}"></c:out>
+
+                                    <c:out value="${row.text}"></c:out>
+                                </p>
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                 </c:if>
                 <c:if test="${date > dateDto.lastDate}">
                     <td></td>
