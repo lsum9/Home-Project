@@ -1,10 +1,31 @@
 
+/*document.getElementById('showDelBtn').addEventListener('click', function() {
+   s
+});
 
-function showDelBtn(){
-    alert("삭제버튼확인");
+document.getElementById('showEditBtn').addEventListener('click', function() {
+    // 모달창 띄우기
+    modal('my_modal');
+});*/
+
+function showDelBtn(flag){
+    var delBtn = document.getElementsByClassName("delBtn");
+    alert(flag);
+    if(flag == false){
+        for(var i = 0; i < delBtn.length ; i++){
+            delBtn[i].style.display="block";
+        }
+        flag = true;
+    }
+
+
 }
+
 function showEditBtn(){
-    alert("수정버튼확인");
+    var editBtn = document.getElementsByClassName(editBtn);
+    editBtn.setStyle({
+        display: 'show'
+    })
 }
 
 function modal(id) {

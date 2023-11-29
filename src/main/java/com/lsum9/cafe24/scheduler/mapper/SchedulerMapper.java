@@ -11,4 +11,6 @@ public interface SchedulerMapper {
 
     int insertSchedule(SchedulerDto schedulerDto);
 
+    int deleteSchedule(int scheduleNo);
+
 }

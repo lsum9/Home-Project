@@ -20,7 +20,8 @@
              , modify_date
         FROM lsum9.tb_scheduler
         WHERE schedule_year = #{scheduleYear}
-          AND schedule_month = #{scheduleMonth};
+          AND schedule_month = #{scheduleMonth}
+        ORDER BY schedule_start_time;
     </select>
 
     <insert id="insertSchedule" parameterType="SchedulerDto">
@@ -48,4 +49,9 @@
             , current_timestamp()
             );
     </insert>
+
+    <delete id="deleteSchedule" parameterType="int">
+        DELETE FROM lsum9.tb_scheduler
+        WHERE schedule_no=#{scheduleNo};
+    </delete>
 </mapper>

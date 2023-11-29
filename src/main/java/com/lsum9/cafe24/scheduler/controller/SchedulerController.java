@@ -76,7 +76,15 @@ public class SchedulerController {
         return "redirect:/scheduler/schedulerList";
     }
 
+    //게시글 삭제
+    @RequestMapping(value = "/delete")
+    public String delete(@ModelAttribute SchedulerDto schedulerDto){
+        System.out.println(schedulerDto.getScheduleNo());
+        int cnt = 0;
+        cnt = schedulerService.delete(schedulerDto.getScheduleNo());
 
+        return "redirect:/scheduler/schedulerList";
+    }
 /*
 
     //게시글상세조회
@@ -90,18 +98,6 @@ public class SchedulerController {
         return mav;
     }//detail() end
 
-
-
-
-    //게시글 삭제
-    @RequestMapping(value = "/Scheduler/delete")
-    public String delete(@RequestParam(value = "SchedulerNo") int SchedulerNo){
-        System.out.println(SchedulerNo);
-        int cnt = 0;
-        cnt = SchedulerService.delete(SchedulerNo);
-
-        return "redirect:/Scheduler/SchedulerList";
-    }
 
     //게시글 수정
     @GetMapping(value = "/Scheduler/updateForm")

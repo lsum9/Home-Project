@@ -20,7 +20,7 @@
     <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
     <script>
         $( function() {
-            $( "#datepicker" ).datepicker();
+            $( "#datepicker" ).datepicker({ minDate: 0});
         } );
     </script>
     <title>scheduler</title>
@@ -34,9 +34,10 @@
             <p>Date: <input type="text" id="datepicker" name="fullDate" value="날짜선택" readonly></p>
         </div>
         <div>
-            시작 : <input type="time" name="scheduleStartTime">
-            종료 : <input type="time" name="scheduleEndTime">
+            시작 : <input type="time" name="scheduleStartTime" min="00:00" max="23:59">
+            종료 : <input type="time" name="scheduleEndTime" min="" max="23:59">
         </div>
+
         <div>
             <input type="text" name="text" placeholder="일정을 입력해 주세요">
         </div>
@@ -57,10 +58,10 @@
             <td><input type="button" value=">" onclick="location.href='/scheduler/schedulerList?chgMonth=${dateDto.chgMonth+1}'"></td>
         </tr>
     </table>
-
 </div>
+
 <div class="container mt-3">
-    <table class="table table-bordered"  id="scheduler">
+    <table class="table table-bordered" id="scheduler">
         <thead>
         <tr>
             <th>일</th>
@@ -81,10 +82,13 @@
                         <td id="dateBox">
                             <c:out value="1"></c:out>
                             <c:set var="date" value="1"></c:set>
-                            <br>
                             <c:if test="${list.size() > 0}">
                                 <c:forEach var="row" items="${list}">
                                     <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == 1}">
+                                        <form method="post" action="/scheduler/delete">
+                                            <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
+                                            <input type="submit" class="delBtn" value="X">
+                                        </form>
                                         <p>
                                             <c:out value="${row.scheduleStartTime}"></c:out>
                                             ~
@@ -102,28 +106,31 @@
                     <c:when test="${firstWeekBoxNo!=dateDto.firstDay}">
                         <%--1일 이전 공란출력--%>
                         <c:if test="${firstWeekBoxNo < dateDto.firstDay}">
-                        <td></td>
+                            <td id="dateBox"></td>
                         </c:if>
                         <%--1일 이후 날짜출력--%>
                         <c:if test="${firstWeekBoxNo > dateDto.firstDay}">
                             <c:set var="firstWeekDate" value="${firstWeekBoxNo-dateDto.firstDay+1}"></c:set>
-                        <td>
-                            <c:out value="${firstWeekDate}"></c:out>
-                            <br>
-                            <c:if test="${list.size() > 0}">
-                                <c:forEach var="row" items="${list}">
-                                    <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == firstWeekDate}">
-                                        <p>
-                                            <c:out value="${row.scheduleStartTime}"></c:out>
-                                            ~
-                                            <c:out value="${row.scheduleEndTime}"></c:out>
+                            <td id="dateBox">
+                                <c:out value="${firstWeekDate}"></c:out>
+                                <c:if test="${list.size() > 0}">
+                                    <c:forEach var="row" items="${list}">
+                                        <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == firstWeekDate}">
+                                            <form method="post" action="/scheduler/delete">
+                                                <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
+                                                <input type="submit" class="delBtn" value="X">
+                                            </form>
+                                            <p>
+                                                <c:out value="${row.scheduleStartTime}"></c:out>
+                                                ~
+                                                <c:out value="${row.scheduleEndTime}"></c:out>
 
-                                            <c:out value="${row.text}"></c:out>
-                                        </p>
-                                    </c:if>
-                                </c:forEach>
-                            </c:if>
-                        </td>
+                                                <c:out value="${row.text}"></c:out>
+                                            </p>
+                                        </c:if>
+                                    </c:forEach>
+                                </c:if>
+                            </td>
 
                         </c:if>
                     </c:when>
@@ -133,40 +140,45 @@
         <!----------첫째주영역끝------------>
 
         <!----------나머지주영역시작------------>
-    <c:forEach var="weekNo" begin="0" end="3">
-        <tr>
-            <c:forEach var="boxNo" begin="1" end="7">
-                <c:set var="date" value="${firstWeekDate + boxNo + weekNo*7}"></c:set>
-                <c:if test="${date <= dateDto.lastDate}">
-                    <td><c:out value="${date}"></c:out></td>
-                    <br>
-                    <c:if test="${list.size() > 0}">
-                        <c:forEach var="row" items="${list}">
-                            <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == date}">
-                                <p>
-                                    <c:out value="${row.scheduleStartTime}"></c:out>
-                                    ~
-                                    <c:out value="${row.scheduleEndTime}"></c:out>
+        <c:forEach var="weekNo" begin="0" end="3">
+            <tr>
+                <c:forEach var="boxNo" begin="1" end="7">
+                    <c:set var="date" value="${firstWeekDate + boxNo + weekNo*7}"></c:set>
+                    <c:if test="${date <= dateDto.lastDate}">
+                        <td id="dateBox">
+                            <c:out value="${date}"></c:out>
+                        <c:if test="${list.size() > 0}">
+                            <c:forEach var="row" items="${list}">
+                                <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == date}">
+                                    <form method="post" action="/scheduler/delete">
+                                        <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
+                                        <input type="submit" class="delBtn" value="X">
+                                    </form>
+                                    <p>
+                                        <c:out value="${row.scheduleStartTime}"></c:out>
+                                        ~
+                                        <c:out value="${row.scheduleEndTime}"></c:out>
 
-                                    <c:out value="${row.text}"></c:out>
-                                </p>
-                            </c:if>
-                        </c:forEach>
+                                        <c:out value="${row.text}"></c:out>
+                                    </p>
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
+                        </td>
                     </c:if>
-                </c:if>
-                <c:if test="${date > dateDto.lastDate}">
-                    <td></td>
-                </c:if>
-            </c:forEach>
-        </tr>
-    </c:forEach>
+                    <c:if test="${date > dateDto.lastDate}">
+                        <td id="dateBox"></td>
+                    </c:if>
+                </c:forEach>
+            </tr>
+        </c:forEach>
         <!----------나머지주영역끝------------>
         </tbody>
     </table>
 </div>
 <div>
     <button id="popup_open_btn">일정작성</button>
-    <button onclick="showDelBtn()">일정삭제</button>
+    <button onclick="showDelBtn(this.value())" value="false">일정삭제</button>
     <button onclick="showEditBtn()">일정수정</button>
     <button onclick="location.href='/scheduler/schedulerList?chgMonth=0'">현재월로</button>
 </div>
