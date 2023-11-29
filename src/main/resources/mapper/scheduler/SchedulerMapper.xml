@@ -31,7 +31,6 @@
              schedule_year
             , schedule_month
             , schedule_date
-            , schedule_day
             , schedule_start_time
             , schedule_end_time
             , `text`
@@ -43,7 +42,6 @@
              #{scheduleYear}
             , #{scheduleMonth}
             , #{scheduleDate}
-            , #{scheduleDay}
             , #{scheduleStartTime}
             , #{scheduleEndTime}
             , #{text}

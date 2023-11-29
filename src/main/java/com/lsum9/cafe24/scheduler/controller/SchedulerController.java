@@ -45,16 +45,28 @@ public class SchedulerController {
     @PostMapping(value = "/insert")
     public String insert(@ModelAttribute SchedulerDto schedulerDto){
 
+        //입력받은 일정의 전체날짜 가공하여 년월일에 넣기
+        String fullDate = schedulerDto.getFullDate();
+        String[] fullDateArray = fullDate.split("/");
+
+        try {
+            schedulerDto.setScheduleYear(Integer.parseInt(fullDateArray[2]));
+            schedulerDto.setScheduleMonth(Integer.parseInt(fullDateArray[0]));
+            schedulerDto.setScheduleDate(Integer.parseInt(fullDateArray[1]));
+        }catch (NumberFormatException ex){
+            System.out.println(ex);
+        }
+
+        System.out.println("인서트내용 : " + schedulerDto);
+
         int cnt = 0;
-        /*cnt = SchedulerService.insert(schedulerDto);
+        cnt = schedulerService.insert(schedulerDto);
         System.out.println("인서트확인: " + cnt);
-        System.out.println("인서트내용 : " + schedulerDto);*/
-
-        System.out.println(schedulerDto.getFullDate());
-        System.out.println(schedulerDto.getScheduleStartTime());
-
-
-        return "redirect:/Scheduler/SchedulerList";
+        if(cnt == 1){
+            System.out.println("인서트내용 : " + schedulerDto);
+            return "redirect:/scheduler/schedulerList";
+        }
+        return "redirect:/scheduler/schedulerList";
     }
 
 

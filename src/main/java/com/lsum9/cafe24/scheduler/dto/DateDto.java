@@ -71,8 +71,6 @@ public class DateDto {
         return firstDayNum;
     }
 
-
-
     /* public String getTime() {
         String time =
         return nowTime.getHour();

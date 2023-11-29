@@ -1,6 +1,7 @@
 package com.lsum9.cafe24.scheduler.dto;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -9,10 +10,6 @@ import java.time.LocalDate;
 public class SchedulerDto {
     private int scheduleNo;
     private String fullDate;
-    private int scheduleYear;
-    private int scheduleMonth;
-    private int scheduleDate;
-    private String scheduleDay;
     private String scheduleStartTime;
     private String scheduleEndTime;
     private String text;
@@ -20,20 +17,7 @@ public class SchedulerDto {
     private String regDate;
     private String modifyId;
     private String modifyDate;
-
-    /*public int getScheduleYear() {
-        return scheduleYear;
-    }
-
-    public int getScheduleMonth() {
-        return scheduleMonth;
-    }
-
-    public int getScheduleDate() {
-        return scheduleDate;
-    }
-
-    public String getScheduleDay() {
-        return scheduleDay;
-    }*/
+    private int scheduleYear;
+    private int scheduleMonth;
+    private int scheduleDate;
 }
