@@ -1,3 +1,12 @@
+
+
+function showDelBtn(){
+    alert("삭제버튼확인");
+}
+function showEditBtn(){
+    alert("수정버튼확인");
+}
+
 function modal(id) {
     var zIndex = 9999;
     var modal = document.getElementById(id);

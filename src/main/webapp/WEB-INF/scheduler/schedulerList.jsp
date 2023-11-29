@@ -60,7 +60,7 @@
 
 </div>
 <div class="container mt-3">
-    <table class="table table-bordered">
+    <table class="table table-bordered"  id="scheduler">
         <thead>
         <tr>
             <th>일</th>
@@ -78,7 +78,7 @@
             <c:forEach var="firstWeekBoxNo" begin="1" end="7">
                 <c:choose>
                     <c:when test="${firstWeekBoxNo==dateDto.firstDay}">
-                        <td>
+                        <td id="dateBox">
                             <c:out value="1"></c:out>
                             <c:set var="date" value="1"></c:set>
                             <br>
@@ -166,6 +166,8 @@
 </div>
 <div>
     <button id="popup_open_btn">일정작성</button>
+    <button onclick="showDelBtn()">일정삭제</button>
+    <button onclick="showEditBtn()">일정수정</button>
     <button onclick="location.href='/scheduler/schedulerList?chgMonth=0'">현재월로</button>
 </div>
 

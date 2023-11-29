@@ -11,8 +11,8 @@
              , schedule_year
              , schedule_month
              , schedule_date
-             , schedule_start_time
-             , schedule_end_time
+             , date_format(schedule_start_time, '%k:%i') as schedule_start_time
+             , date_format(schedule_end_time, '%k:%i') as schedule_end_time
              , `text`
              , reg_id
              , reg_date
