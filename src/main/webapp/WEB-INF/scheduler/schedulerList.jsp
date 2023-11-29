@@ -76,11 +76,12 @@
         <tbody>
         <!----------첫째주영역시작------------>
         <tr>
-            <c:forEach var="i" begin="1" end="7">
+            <c:forEach var="firstWeekBoxNo" begin="1" end="7">
                 <c:choose>
-                    <c:when test="${i==dateDto.firstDay}">
+                    <c:when test="${firstWeekBoxNo==dateDto.firstDay}">
                         <td>
                             <c:out value="1"></c:out>
+                            <c:set var="date" value="1"></c:set>
                             <br>
                             <table>
                                 <tr></tr>
@@ -88,13 +89,20 @@
                         </td>
                     </c:when>
 
-                    <c:when test="${i!=dateDto.firstDay}">
-                        <c:if test="${i < dateDto.firstDay}">
+                    <%--첫째주에서 1일이 아닌 경우의 날짜출력--%>
+                    <c:when test="${firstWeekBoxNo!=dateDto.firstDay}">
+                        <%--1일 이전 공란출력--%>
+                        <c:if test="${firstWeekBoxNo < dateDto.firstDay}">
                         <td></td>
                         </c:if>
-                        <c:if test="${i > dateDto.firstDay}">
-                        <td><c:out value="${i-dateDto.firstDay+1}"></c:out></td>
-                            <c:set var="n" value="${i-dateDto.firstDay+1}"></c:set>
+                        <%--1일 이후 날짜출력--%>
+                        <c:if test="${firstWeekBoxNo > dateDto.firstDay}">
+                            <c:set var="firstWeekDate" value="${firstWeekBoxNo-dateDto.firstDay+1}"></c:set>
+                        <td>
+                            <c:out value="${firstWeekDate}"></c:out>
+                            <br>
+                        </td>
+
                         </c:if>
                     </c:when>
                 </c:choose>
@@ -103,13 +111,14 @@
         <!----------첫째주영역끝------------>
 
         <!----------나머지주영역시작------------>
-    <c:forEach var="b" begin="0" end="3">
+    <c:forEach var="weekNo" begin="0" end="3">
         <tr>
-            <c:forEach var="a" begin="1" end="7">
-                <c:if test="${n+a+b*7 <= dateDto.lastDate}">
-                    <td><c:out value="${n+a+b*7}"></c:out></td>
+            <c:forEach var="boxNo" begin="1" end="7">
+                <c:set var="date" value="${firstWeekDate + boxNo + weekNo*7}"></c:set>
+                <c:if test="${date <= dateDto.lastDate}">
+                    <td><c:out value="${date}"></c:out></td>
                 </c:if>
-                <c:if test="${n+a+b*7 > dateDto.lastDate}">
+                <c:if test="${date > dateDto.lastDate}">
                     <td></td>
                 </c:if>
             </c:forEach>

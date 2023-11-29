@@ -20,7 +20,7 @@ public class SchedulerController {
     }
 
     @RequestMapping(value = "/schedulerList")
-    public ModelAndView scheduler(@RequestParam(value = "showDate", defaultValue = "") String showDate
+    public ModelAndView scheduler(@RequestParam(value = "selectDate", defaultValue = "") String selectDate
                                  ,@RequestParam(value = "chgMonth", defaultValue = "0") int chgMonth
                               ) throws Exception{
         ModelAndView mav = new ModelAndView();
@@ -56,8 +56,6 @@ public class SchedulerController {
         }catch (NumberFormatException ex){
             System.out.println(ex);
         }
-
-        System.out.println("인서트내용 : " + schedulerDto);
 
         int cnt = 0;
         cnt = schedulerService.insert(schedulerDto);
