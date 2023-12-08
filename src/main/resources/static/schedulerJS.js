@@ -8,7 +8,7 @@ document.getElementById('showEditBtn').addEventListener('click', function() {
     modal('my_modal');
 });*/
 
-function showDelBtn(flag){
+/*function showDelBtn(flag){
     var delBtn = document.getElementsByClassName("delBtn");
     alert(flag);
     if(flag == false){
@@ -17,15 +17,38 @@ function showDelBtn(flag){
         }
         flag = true;
     }
+}*/
 
-
+function showDelBtn(){
+    var delBtn = document.getElementsByClassName('delBtn');
+    var delFlag = document.getElementById('delFlag').value;
+    if(delFlag == "false"){
+        for(var i = 0; i < delBtn.length ; i++){
+            delBtn[i].style.display="block";
+        }
+        document.getElementById('delFlag').value = "true";
+    }else{
+        for(var i = 0; i < delBtn.length ; i++){
+            delBtn[i].style.display="none";
+        }
+        document.getElementById('delFlag').value = "false";
+    }
 }
 
 function showEditBtn(){
-    var editBtn = document.getElementsByClassName(editBtn);
-    editBtn.setStyle({
-        display: 'show'
-    })
+    var editBtn = document.getElementsByClassName('editBtn');
+    var editFlag = document.getElementById('editFlag').value;
+    if(editFlag == "false"){
+        for(var i = 0; i < editBtn.length ; i++){
+            editBtn[i].style.display="block";
+        }
+        document.getElementById('editFlag').value = "true";
+    }else{
+        for(var i = 0; i < editBtn.length ; i++){
+            editBtn[i].style.display="none";
+        }
+        document.getElementById('editFlag').value = "false";
+    }
 }
 
 function modal(id) {
@@ -77,6 +100,14 @@ Element.prototype.setStyle = function(styles) {
 };
 
 document.getElementById('popup_open_btn').addEventListener('click', function() {
-    // 모달창 띄우기
+    // 일정추가 모달창 띄우기
     modal('my_modal');
+});
+
+function editParameter(scheduleNo){
+    return scheduleNo;
+}
+document.getElementById('editBtn'+ editParameter()).addEventListener('click', function() {
+    // 모달창 띄우기
+    modal('editModal');
 });

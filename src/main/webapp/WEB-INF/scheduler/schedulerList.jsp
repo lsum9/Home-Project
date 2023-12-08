@@ -44,8 +44,30 @@
         <input type="submit" value="작성">
         <a class="modal_close_btn">닫기</a>
     </form>
-
 </div>
+<!--일정추가 모달끝-->
+
+<!--일정수정 모달-->
+<div id="editModal">
+    <form method="post" action="update">
+        <div>
+            <p>Date: <input type="text" id="datepicker2" name="fullDate" value="날짜선택" readonly></p>
+        </div>
+        <div>
+            시작 : <input type="time" name="scheduleStartTime" min="00:00" max="23:59">
+            종료 : <input type="time" name="scheduleEndTime" min="" max="23:59">
+        </div>
+
+        <div>
+            <input type="text" name="text" placeholder="일정을 입력해 주세요">
+        </div>
+        <input type="submit" value="수정">
+        <a class="modal_close_btn">닫기</a>
+    </form>
+</div>
+<!--일정수정 모달끝-->
+
+
 <div>
     <%--<c:set var="showDate" value="${dateDto.date}">--%>
     <table class="table">
@@ -88,6 +110,7 @@
                                         <form method="post" action="/scheduler/delete">
                                             <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
                                             <input type="submit" class="delBtn" value="X">
+                                            <input type="button" class="editBtn" value="수정">
                                         </form>
                                         <p>
                                             <c:out value="${row.scheduleStartTime}"></c:out>
@@ -119,6 +142,7 @@
                                             <form method="post" action="/scheduler/delete">
                                                 <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
                                                 <input type="submit" class="delBtn" value="X">
+                                                <input type="button" class="editBtn" value="수정">
                                             </form>
                                             <p>
                                                 <c:out value="${row.scheduleStartTime}"></c:out>
@@ -153,6 +177,7 @@
                                     <form method="post" action="/scheduler/delete">
                                         <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
                                         <input type="submit" class="delBtn" value="X">
+                                        <input type="button" class="editBtn+${row.scheduleNo}" value="수정">
                                     </form>
                                     <p>
                                         <c:out value="${row.scheduleStartTime}"></c:out>
@@ -178,7 +203,9 @@
 </div>
 <div>
     <button id="popup_open_btn">일정작성</button>
-    <button onclick="showDelBtn(this.value())" value="false">일정삭제</button>
+    <input type="hidden" value="false" id="delFlag" name="delFlag">
+    <button onclick="showDelBtn()">일정삭제</button>
+    <input type="hidden" value="false" id="editFlag" name="editFlag">
     <button onclick="showEditBtn()">일정수정</button>
     <button onclick="location.href='/scheduler/schedulerList?chgMonth=0'">현재월로</button>
 </div>
