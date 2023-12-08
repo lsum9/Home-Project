@@ -47,7 +47,6 @@ public class SchedulerController {
         schedulerDto.setScheduleMonth(dateDto.getMonth());
         //schedulerDto.setScheduleDate(dateDto.getDate());
         mav.addObject("list", schedulerService.scheduleList(schedulerDto));
-        System.out.println(schedulerService.scheduleList(schedulerDto));
         return mav;
     }
 
@@ -79,46 +78,21 @@ public class SchedulerController {
     //게시글 삭제
     @RequestMapping(value = "/delete")
     public String delete(@ModelAttribute SchedulerDto schedulerDto){
-        System.out.println(schedulerDto.getScheduleNo());
         int cnt = 0;
         cnt = schedulerService.delete(schedulerDto.getScheduleNo());
 
         return "redirect:/scheduler/schedulerList";
     }
-/*
-
-    //게시글상세조회
-    @GetMapping(value = "/Scheduler/detail")
-    public ModelAndView detail(@RequestParam(value = "SchedulerNo") int SchedulerNo){
-        ModelAndView mav = new ModelAndView();
-
-        mav.setViewName("/Scheduler/detail");
-        mav.addObject("SchedulerVo", SchedulerService.SchedulerDetail(SchedulerNo));
-        System.out.println("디테일:"+mav);
-        return mav;
-    }//detail() end
 
 
-    //게시글 수정
-    @GetMapping(value = "/Scheduler/updateForm")
-    public ModelAndView updateForm(@RequestParam(value = "SchedulerNo") int SchedulerNo) {
-        ModelAndView mav = new ModelAndView();
-
-        mav.setViewName("/Scheduler/updateForm");
-        mav.addObject("SchedulerVo", SchedulerService.SchedulerDetail(SchedulerNo));
-
-        return mav;
-    }//writeForm
-
-    @PostMapping(value = "/Scheduler/update")
-    public String update(@ModelAttribute SchedulerVo SchedulerVo){
-        System.out.println("수정내용:"+SchedulerVo);
+    @PostMapping(value = "/update")
+    public String update(@ModelAttribute SchedulerDto schedulerDto){
+        System.out.println("수정내용:"+schedulerDto);
         int cnt = 0;
-        cnt = SchedulerService.update(SchedulerVo);
+        cnt = schedulerService.update(schedulerDto);
         System.out.println("업데이트확인: " + cnt);
 
-        return "redirect:/Scheduler/SchedulerList";
+        return "redirect:/scheduler/schedulerList";
     }
-*/
 
 }//end

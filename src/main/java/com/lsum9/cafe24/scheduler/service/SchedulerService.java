@@ -26,4 +26,7 @@ public class SchedulerService {
     }
 
     public int delete(int scheduleNo) {return schedulerMapper.deleteSchedule(scheduleNo);}
+
+
+    public int update(SchedulerDto schedulerDto){return schedulerMapper.updateSchedule(schedulerDto);}
 }//end

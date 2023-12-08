@@ -54,4 +54,20 @@
         DELETE FROM lsum9.tb_scheduler
         WHERE schedule_no=#{scheduleNo};
     </delete>
+
+    <select id="selectSchedule" parameterType="int" resultType="SchedulerDto">
+        SELECT FROM lsum9.tb_scheduler
+        WHERE schedule_no=#{scheduleNo};
+    </select>
+
+    <update id="updateSchedule" parameterType="SchedulerDto">
+        UPDATE lsum9.tb_scheduler
+            SET
+               schedule_start_time=#{scheduleStartTime}
+              , `text`=#{text}
+              , modify_id=#{modifyId}
+              , modify_date=#{modifyDate}
+              , schedule_end_time=#{scheduleEndTime}
+        WHERE schedule_no=#{scheduleNo};
+    </update>
 </mapper>

@@ -29,6 +29,7 @@
 <body>
 <!--일정추가 모달-->
 <div id="my_modal">
+    <p>일정추가</p>
     <form method="post" action="insert">
         <div>
             <p>Date: <input type="text" id="datepicker" name="fullDate" value="날짜선택" readonly></p>
@@ -49,17 +50,22 @@
 
 <!--일정수정 모달-->
 <div id="editModal">
+    <p>일정수정</p>
     <form method="post" action="update">
-        <div>
-            <p>Date: <input type="text" id="datepicker2" name="fullDate" value="날짜선택" readonly></p>
-        </div>
-        <div>
-            시작 : <input type="time" name="scheduleStartTime" min="00:00" max="23:59">
-            종료 : <input type="time" name="scheduleEndTime" min="" max="23:59">
-        </div>
-
-        <div>
-            <input type="text" name="text" placeholder="일정을 입력해 주세요">
+        <%--<div>
+            <c:out value="${dateDto.month}"></c:out>월
+        </div>--%>
+        <div class="modalContent">
+            <%--<div>
+                <c:out value="Date: ${dateDto.month}"></c:out>/
+            </div>
+            <div>
+                시작 : <input type="time" name="scheduleStartTime" value="12:12" min="00:00" max="23:59">
+                종료 : <input type="time" name="scheduleEndTime" min="" max="23:59">
+            </div>
+            <div>
+                <input type="text" name="text" placeholder="일정을 입력해 주세요">
+            </div>--%>
         </div>
         <input type="submit" value="수정">
         <a class="modal_close_btn">닫기</a>
@@ -108,10 +114,10 @@
                                 <c:forEach var="row" items="${list}">
                                     <c:if test="${dateDto.year == row.scheduleYear and dateDto.month == row.scheduleMonth and row.scheduleDate == 1}">
                                         <form method="post" action="/scheduler/delete">
-                                            <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
+                                            <input type="hidden" value="${row.scheduleNo}" id="scheduleNo" name="scheduleNo">
                                             <input type="submit" class="delBtn" value="X">
-                                            <input type="button" class="editBtn" value="수정">
                                         </form>
+                                        <input type="button" class="editBtn" name="editBtn" value="수정" onclick="editTarget(${row.scheduleNo})">
                                         <p>
                                             <c:out value="${row.scheduleStartTime}"></c:out>
                                             ~
@@ -119,6 +125,10 @@
 
                                             <c:out value="${row.text}"></c:out>
                                         </p>
+                                        <input type="hidden" id="scheduleDate${row.scheduleNo}" value="${row.scheduleDate}">
+                                        <input type="hidden" id="scheduleStartTime${row.scheduleNo}" value="${row.scheduleStartTime}">
+                                        <input type="hidden" id="scheduleEndTime${row.scheduleNo}" value="${row.scheduleEndTime}">
+                                        <input type="hidden" id="text${row.scheduleNo}" value="${row.text}">
                                     </c:if>
                                 </c:forEach>
                             </c:if>
@@ -142,8 +152,8 @@
                                             <form method="post" action="/scheduler/delete">
                                                 <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
                                                 <input type="submit" class="delBtn" value="X">
-                                                <input type="button" class="editBtn" value="수정">
                                             </form>
+                                            <input type="button" class="editBtn" name="editBtn" value="수정" onclick="editTarget(${row.scheduleNo})">
                                             <p>
                                                 <c:out value="${row.scheduleStartTime}"></c:out>
                                                 ~
@@ -151,6 +161,10 @@
 
                                                 <c:out value="${row.text}"></c:out>
                                             </p>
+                                            <input type="hidden" id="scheduleDate${row.scheduleNo}" value="${row.scheduleDate}">
+                                            <input type="hidden" id="scheduleStartTime${row.scheduleNo}" value="${row.scheduleStartTime}">
+                                            <input type="hidden" id="scheduleEndTime${row.scheduleNo}" value="${row.scheduleEndTime}">
+                                            <input type="hidden" id="text${row.scheduleNo}" value="${row.text}">
                                         </c:if>
                                     </c:forEach>
                                 </c:if>
@@ -177,8 +191,8 @@
                                     <form method="post" action="/scheduler/delete">
                                         <input type="hidden" value="${row.scheduleNo}" name="scheduleNo">
                                         <input type="submit" class="delBtn" value="X">
-                                        <input type="button" class="editBtn+${row.scheduleNo}" value="수정">
                                     </form>
+                                    <input type="button" class="editBtn" name="editBtn" value="수정" onclick="editTarget(${row.scheduleNo})">
                                     <p>
                                         <c:out value="${row.scheduleStartTime}"></c:out>
                                         ~
@@ -186,6 +200,10 @@
 
                                         <c:out value="${row.text}"></c:out>
                                     </p>
+                                    <input type="hidden" id="scheduleDate${row.scheduleNo}" value="${row.scheduleDate}">
+                                    <input type="hidden" id="scheduleStartTime${row.scheduleNo}" value="${row.scheduleStartTime}">
+                                    <input type="hidden" id="scheduleEndTime${row.scheduleNo}" value="${row.scheduleEndTime}">
+                                    <input type="hidden" id="text${row.scheduleNo}" value="${row.text}">
                                 </c:if>
                             </c:forEach>
                         </c:if>
