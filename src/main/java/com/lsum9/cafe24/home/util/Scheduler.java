@@ -1,6 +1,6 @@
-package com.lsum9.cafe24.util;
+package com.lsum9.cafe24.home.util;
 
-import com.lsum9.cafe24.scheduler.dto.DateDto;
+import com.lsum9.cafe24.home.scheduler.dto.DateDto;
 
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;

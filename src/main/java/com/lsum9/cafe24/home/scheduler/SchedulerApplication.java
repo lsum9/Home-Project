@@ -1,13 +1,15 @@
-package com.lsum9.cafe24.board;
+/*
+package com.lsum9.cafe24.home.scheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class  BoardApplication {
+public class SchedulerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoardApplication.class, args);
+		SpringApplication.run(SchedulerApplication.class, args);
 	}
 
 }
+*/

@@ -1,21 +1,16 @@
-package com.lsum9.cafe24.board.controller;
+package com.lsum9.cafe24.home.board.controller;
 
-import com.lsum9.cafe24.board.service.BoardService;
-import com.lsum9.cafe24.board.vo.BoardVo;
-import com.lsum9.cafe24.board.vo.PagingVo;
-import com.lsum9.cafe24.util.Paging;
+import com.lsum9.cafe24.home.board.service.BoardService;
+import com.lsum9.cafe24.home.board.vo.BoardVo;
+import com.lsum9.cafe24.home.board.vo.PagingVo;
+import com.lsum9.cafe24.home.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
-import java.util.Map;
 
 @Controller
 public class BoardController {

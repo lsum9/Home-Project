@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.lsum9.cafe24.board.mapper.BoardMapper">
+<mapper namespace="com.lsum9.cafe24.home.board.mapper.BoardMapper">
 
     <select id="rowCnt" resultType="int">
         select nvl(max(board_no),0)

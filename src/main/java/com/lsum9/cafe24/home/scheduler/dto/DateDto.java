@@ -1,4 +1,4 @@
-package com.lsum9.cafe24.scheduler.dto;
+package com.lsum9.cafe24.home.scheduler.dto;
 
 import lombok.Data;
 

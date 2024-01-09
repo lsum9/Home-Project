@@ -1,4 +1,4 @@
-package com.lsum9.cafe24.board.vo;
+package com.lsum9.cafe24.home.board.vo;
 
 import lombok.Data;
 

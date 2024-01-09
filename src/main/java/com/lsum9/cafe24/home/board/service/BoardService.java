@@ -1,8 +1,8 @@
-package com.lsum9.cafe24.board.service;
+package com.lsum9.cafe24.home.board.service;
 
-import com.lsum9.cafe24.board.mapper.BoardMapper;
-import com.lsum9.cafe24.board.vo.BoardVo;
-import com.lsum9.cafe24.board.vo.PagingVo;
+import com.lsum9.cafe24.home.board.mapper.BoardMapper;
+import com.lsum9.cafe24.home.board.vo.BoardVo;
+import com.lsum9.cafe24.home.board.vo.PagingVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class BoardService {

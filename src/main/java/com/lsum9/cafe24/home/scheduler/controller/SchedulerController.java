@@ -1,15 +1,13 @@
-package com.lsum9.cafe24.scheduler.controller;
+package com.lsum9.cafe24.home.scheduler.controller;
 
-import com.lsum9.cafe24.scheduler.dto.DateDto;
-import com.lsum9.cafe24.scheduler.dto.SchedulerDto;
-import com.lsum9.cafe24.scheduler.service.SchedulerService;
-import com.lsum9.cafe24.util.Scheduler;
+import com.lsum9.cafe24.home.scheduler.dto.DateDto;
+import com.lsum9.cafe24.home.scheduler.dto.SchedulerDto;
+import com.lsum9.cafe24.home.scheduler.service.SchedulerService;
+import com.lsum9.cafe24.home.util.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.time.LocalDate;
 
 
 @Controller

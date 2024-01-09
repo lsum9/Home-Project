@@ -1,7 +1,7 @@
-package com.lsum9.cafe24.scheduler.service;
+package com.lsum9.cafe24.home.scheduler.service;
 
-import com.lsum9.cafe24.scheduler.dto.SchedulerDto;
-import com.lsum9.cafe24.scheduler.mapper.SchedulerMapper;
+import com.lsum9.cafe24.home.scheduler.mapper.SchedulerMapper;
+import com.lsum9.cafe24.home.scheduler.dto.SchedulerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
