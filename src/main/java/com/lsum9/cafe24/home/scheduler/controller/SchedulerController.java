@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@Controller
+@RestController
 @RequestMapping("/scheduler")
 public class SchedulerController {
 
@@ -50,6 +50,8 @@ public class SchedulerController {
 
     @PostMapping(value = "/insert")
     public String insert(@ModelAttribute SchedulerDto schedulerDto){
+
+        System.out.println(schedulerDto);
 
         //입력받은 일정의 전체날짜 가공하여 년월일에 넣기
         String fullDate = schedulerDto.getFullDate();

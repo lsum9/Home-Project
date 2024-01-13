@@ -4,6 +4,7 @@ import com.lsum9.cafe24.home.board.service.BoardService;
 import com.lsum9.cafe24.home.board.vo.BoardVo;
 import com.lsum9.cafe24.home.board.vo.PagingVo;
 import com.lsum9.cafe24.home.util.Paging;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import java.util.ArrayList;
+import java.util.List;
+
+@RestController
 public class BoardController {
 
     private BoardService boardService;
@@ -25,8 +29,8 @@ public class BoardController {
     @RequestMapping(value = "/board/boardList")
     public ModelAndView board(Pageable pageable
                               ,@RequestParam(value = "nowPage", defaultValue = "1") int nowPage
-                              ,@RequestParam(value = "keyWord", defaultValue = "") String keyWord
-                              ,@RequestParam(value = "searchType", defaultValue = "title") String searchType
+                              /*,@RequestParam(value = "keyWord", defaultValue = "") String keyWord
+                              ,@RequestParam(value = "searchType", defaultValue = "title") String searchType*/
                               ) throws Exception{
 
         ModelAndView mav = new ModelAndView();
@@ -119,6 +123,15 @@ public class BoardController {
         System.out.println("업데이트확인: " + cnt);
 
         return "redirect:/board/boardList";
+    }
+
+    @ApiOperation(value = "게시판 조회하는 API 입니다.")
+    @GetMapping(value = "/board/dashboard/{boardNo}")
+    BoardVo getDashBoardDetail(
+            @PathVariable("boardNo") int boardNo
+    ){
+        BoardVo list = boardService.boardDetail(boardNo);
+        return list;
     }
 
 }//end
