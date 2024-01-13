@@ -36,7 +36,11 @@
 
 <div>
     <input type="button" value="목록으로" onclick="location.href='/board/boardList'">
-    <input type="button" value="삭제" onclick="location.href='delete?boardNo=${boardVo.boardNo}'">
+    <form method="post" action="/board/delete">
+        <input type="hidden" name="boardNo" id="boardNo" value="${boardVo.boardNo}">
+        <input type="submit" value="삭제">
+    </form>
+
     <input type="button" value="수정" onclick="location.href='updateForm?boardNo=${boardVo.boardNo}'">
 
 

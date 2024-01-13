@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 public class BoardController {
 
     private BoardService boardService;
@@ -26,15 +26,12 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @RequestMapping(value = "/board/boardList")
-    public ModelAndView board(Pageable pageable
-                              ,@RequestParam(value = "nowPage", defaultValue = "1") int nowPage
+    @GetMapping(value = "/board/boardList")
+    public ModelAndView board(@RequestParam(value = "nowPage", defaultValue = "1") int nowPage
                               /*,@RequestParam(value = "keyWord", defaultValue = "") String keyWord
                               ,@RequestParam(value = "searchType", defaultValue = "title") String searchType*/
                               ) throws Exception{
-
-        ModelAndView mav = new ModelAndView();
-
+        Pageable pageable;
         pageable = PageRequest.of(nowPage-1, 5); //offset은 0부터 시작해야 하므로 nowPage-1
         Page<BoardVo> boardList = boardService.boardList(pageable);
         //페이징 처리 위한 클래스 호출
@@ -58,7 +55,7 @@ public class BoardController {
         pagingVo = paging.pagingInfo(pagingVo);
 
         //페이징정보 넘겨서 게시글목록 받기
-        mav.setViewName("/board/boardList");
+        ModelAndView mav = new ModelAndView("/board/boardList");
         mav.addObject("list", boardList.getContent());
         mav.addObject("totalRow", boardService.totalRow());
         mav.addObject("pagingVo", pagingVo);
@@ -69,34 +66,33 @@ public class BoardController {
     //게시글상세조회
     @GetMapping(value = "/board/detail")
     public ModelAndView detail(@RequestParam(value = "boardNo") int boardNo){
-        ModelAndView mav = new ModelAndView();
-
-        mav.setViewName("/board/detail");
+        ModelAndView mav = new ModelAndView("/board/detail");
         mav.addObject("boardVo", boardService.boardDetail(boardNo));
         System.out.println("디테일:"+mav);
         return mav;
     }//detail() end
 
-    //게시글 작성
+    //게시글 작성폼
     @GetMapping(value = "/board/writeForm")
-    public String writeForm(){
-        return "/board/writeForm";
-    }//writeForm
+    public ModelAndView writeForm(){
+        ModelAndView mav = new ModelAndView("/board/writeForm");
+        return mav;
+    }
 
+    //게시글작성
     @PostMapping(value = "/board/insert")
-    public String insert(@ModelAttribute BoardVo boardVo){
-
+    public String insert(@ModelAttribute BoardVo boardVo) throws Exception {
+        ModelAndView mav = new ModelAndView("/board/boardList");
         int cnt = 0;
         cnt = boardService.insert(boardVo);
         System.out.println("인서트확인: " + cnt);
         System.out.println("인서트내용 : " + boardVo);
-
         return "redirect:/board/boardList";
     }
 
     //게시글 삭제
-    @RequestMapping(value = "/board/delete")
-    public String delete(@RequestParam(value = "boardNo") int boardNo){
+    @PostMapping(value = "/board/delete")
+    public String delete(@RequestParam("boardNo") int boardNo){
         System.out.println(boardNo);
         int cnt = 0;
         cnt = boardService.delete(boardNo);
