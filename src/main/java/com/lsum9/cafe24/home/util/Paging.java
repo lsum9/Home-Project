@@ -54,8 +54,6 @@ public class Paging {
             }//if end
         }//if end
 
-
-
         pagingVo.setStartPageNum(startPageNum);
         pagingVo.setEndPageNum(endPageNum);
 

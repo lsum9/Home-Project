@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class BoardController {
 
     private BoardService boardService;
