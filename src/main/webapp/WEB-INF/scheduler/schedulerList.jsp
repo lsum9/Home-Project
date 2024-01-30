@@ -74,20 +74,7 @@
 <div id="editModal">
     <p>일정수정</p>
     <form method="post" action="update">
-        <%--<div>
-            <c:out value="${dateDto.month}"></c:out>월
-        </div>--%>
         <div class="modalContent">
-            <%--<div>
-                <c:out value="Date: ${dateDto.month}"></c:out>/
-            </div>
-            <div>
-                시작 : <input type="time" name="scheduleStartTime" value="12:12" min="00:00" max="23:59">
-                종료 : <input type="time" name="scheduleEndTime" min="" max="23:59">
-            </div>
-            <div>
-                <input type="text" name="text" placeholder="일정을 입력해 주세요">
-            </div>--%>
         </div>
         <input type="submit" value="수정">
         <a class="modal_close_btn">닫기</a>
@@ -97,7 +84,6 @@
 
 
 <div>
-    <%--<c:set var="showDate" value="${dateDto.date}">--%>
     <table class="table">
         <tr class="table-active">
             <td><input type="button" value="<" onclick="location.href='/scheduler/schedulerList?chgMonth=${dateDto.chgMonth-1}'"></td>

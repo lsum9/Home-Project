@@ -44,7 +44,6 @@
 
     </c:if>
     <c:if test="${fn:length(list) != 0}">
-  <%--  <div><c:out value="${rowCnt}"></c:out></div>--%>
     <table class="table table-hover">
         <thead>
         <tr>
@@ -75,7 +74,6 @@
                     <li class="page-item"><a class="page-link" href="boardList?nowPage=${pagingVo.nowPage-1}"> < </a></li>
                 </c:if>
                 <c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.endPageNum}">
-                <%--<c:forEach var="i" begin="${pagingVo.startPageNum}" end="${pagingVo.startPageNum + pagingVo.pageNumCnt-1}">--%>
                     <c:choose>
                         <c:when test="${pagingVo.nowPage == i}">
                             <li class="page-item active"><a class="page-link" href="boardList?nowPage=${i}"> ${i} </a></li>
