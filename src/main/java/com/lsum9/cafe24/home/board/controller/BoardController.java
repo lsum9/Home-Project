@@ -4,6 +4,8 @@ import com.lsum9.cafe24.home.board.service.BoardService;
 import com.lsum9.cafe24.home.board.vo.BoardVo;
 import com.lsum9.cafe24.home.board.vo.PagingVo;
 import com.lsum9.cafe24.home.util.Paging;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,6 +63,40 @@ public class BoardController {
         mav.addObject("pagingVo", pagingVo);
 
         return mav;
+    }
+    @ApiOperation(value = "게시판 리스트 조회 API")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "nowPage", value = "nowPage", defaultValue = "1", required = true)
+    })
+    @GetMapping(value = "/getBoardList/{nowPage}")
+    Page<BoardVo> getBoardList(
+            @PathVariable(value = "nowPage") int nowPage
+        ) {
+        //int nowPage = 1;
+        Pageable pageable;
+        pageable = PageRequest.of(nowPage-1, 5); //offset은 0부터 시작해야 하므로 nowPage-1
+        Page<BoardVo> boardList = boardService.boardList(pageable);
+        //페이징 처리 위한 클래스 호출
+        Paging paging = new Paging();
+
+        //페이징 처리 위한 vo객체 생성
+        PagingVo pagingVo = new PagingVo();
+
+        //페이지당 행수, 네비 페이지숫자 노출갯수
+        int rowPerPage = 5;
+        int pageNumCnt = 5;
+        int totalPage = boardList.getTotalPages();
+
+        //페이징정보 구성 위한 파라미터 set
+        pagingVo.setNowPage(nowPage);
+        pagingVo.setRowPerPage(rowPerPage);
+        pagingVo.setPageNumCnt(pageNumCnt);
+        pagingVo.setTotalPage(totalPage);
+
+        //페이징정보 구성 위한 클래스에 필요 파라미터 넘기고 네비정보 추가해오기
+        pagingVo = paging.pagingInfo(pagingVo);
+
+        return boardList;
     }
 
     //게시글상세조회
