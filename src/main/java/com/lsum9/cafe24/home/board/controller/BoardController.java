@@ -81,8 +81,9 @@ public class BoardController {
 
     //게시글작성
     @PostMapping(value = "/board/insert")
-    public String insert(@ModelAttribute BoardVo boardVo) throws Exception {
+    public String insert(@RequestBody BoardVo boardVo) throws Exception {
         ModelAndView mav = new ModelAndView("/board/boardList");
+        System.out.println(boardVo);
         int cnt = 0;
         cnt = boardService.insert(boardVo);
         System.out.println("인서트확인: " + cnt);
